@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "flask-crud"
+version = "0.1.0"
+description = ""
+authors = ["Fabio Araujo <fabioaraujods@gmail.com>"]
+readme = "README.md"
+packages = [{include = "flask_crud"}]
+
+[tool.poetry.dependencies]
+python = "^3.9.9"
+Flask = "2.0.2"
+mysqlclient = "^2.1.1"
+Flask-SQLAlchemy = "2.5.1"
+Flask-WTF = "1.0.0"
+Flask-Bcrypt = "0.7.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

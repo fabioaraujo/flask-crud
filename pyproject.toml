@@ -9,10 +9,11 @@ packages = [{include = "flask_crud"}]
 [tool.poetry.dependencies]
 python = "^3.9.9"
 Flask = "2.0.2"
-mysqlclient = "^2.1.1"
 Flask-SQLAlchemy = "2.5.1"
 Flask-WTF = "1.0.0"
 Flask-Bcrypt = "0.7.1"
+mysql = "^0.0.3"
+mysql-connector-python = "^8.0.33"
 
 
 [build-system]

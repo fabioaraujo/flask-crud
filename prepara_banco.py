@@ -1,18 +1,19 @@
 import mysql.connector
 from mysql.connector import errorcode
 import os
-from dotenv import load_dotenv  # noqa: F401
+from dotenv import load_dotenv
+
+load_dotenv()
 
 print("Conectando...")
 try:
     conn = mysql.connector.connect(
-        host="127.0.0.1", user=os.getenv("USER_DB"), password=os.getenv("PWD_DB")
+        host=os.getenv("HOST"), user=os.getenv("USER_DB"), password=os.getenv("PWD_DB")
     )
 except mysql.connector.Error as err:
     if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
         print("Existe algo errado no nome de usuário ou senha")
-    else:
-        print(err)
+    print(err)
 
 cursor = conn.cursor()
 

@@ -7,7 +7,7 @@ app.config.from_pyfile("config.py")
 
 db = SQLAlchemy(app)
 
-from views import * #import das rotas após configuração do app
+from views import *  # noqa: E402 F401 F403 # import das rotas após configuração do app
 
 if __name__ == "__main__":
     app.run(debug=True)

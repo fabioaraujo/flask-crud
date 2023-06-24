@@ -1,14 +1,13 @@
-from jogoteca import app
 import os
-from dotenv import load_dotenv
 
-SECRET_KEY = 'alura'
+from dotenv import load_dotenv  # noqa: F401
 
-SQLALCHEMY_DATABASE_URI = \
-    "{SGBD}://{usuario}:{senha}@{servidor}/{database}".format(
-        SGBD = "mysql+mysqlconnector",
-        usuario = os.getenv("USER_DB"),
-        senha = os.getenv("PWD_DB"),
-        servidor = os.getenv("HOST"),
-        database = "jogoteca"
-    )
+SECRET_KEY = "alura"
+
+SQLALCHEMY_DATABASE_URI = "{SGBD}://{usuario}:{senha}@{servidor}/{database}".format(
+    SGBD="mysql+mysqlconnector",
+    usuario=os.getenv("USER_DB"),
+    senha=os.getenv("PWD_DB"),
+    servidor=os.getenv("HOST"),
+    database="jogoteca",
+)

@@ -9,11 +9,16 @@ def index():
     return render_template("lista.html", titulo="Jogos", jogos=lista)
 
 
+def verifica_login(proxima, funcao_logado, **params):
+    if "usuario_logado" not in session or session["usuario_logado"] is None:
+        return redirect(url_for("login", proxima=url_for(proxima, **params)))
+
+    return funcao_logado(params)
+
+
 @app.route("/novo")
 def novo():
-    if "usuario_logado" not in session or session["usuario_logado"] is None:
-        return redirect(url_for("login", proxima=url_for("novo")))
-    return render_template("novo.html", titulo="Novo Jogo")
+    return verifica_login("novo", render_template("novo.html", titulo="Novo Jogo"))
 
 
 @app.route(
@@ -37,25 +42,27 @@ def criar():
     return redirect(url_for("index"))
 
 
-@app.route("/editar/<int:id>")
-def editar(id):
-    if "usuario_logado" not in session or session["usuario_logado"] is None:
-        return redirect(url_for("login", proxima=url_for("editar")))
-
+def prepara_editar(id):
     jogo = Jogos.query.filter_by(id=id).first()
     return render_template("editar.html", titulo="Editar Jogo", jogo=jogo)
 
 
-@app.route("/deletar/<int:id>")
-def deletar(id):
-    if "usuario_logado" not in session or session["usuario_logado"] is None:
-        return redirect(url_for("login"))
+@app.route("/editar/<int:id>")
+def editar(id):
+    return verifica_login("editar", prepara_editar, id=id)
 
+
+def prepara_deletar(id):
     Jogos.query.filter_by(id=id).delete()
     db.session.commit()
     flash("Jogo deletado com sucesso")
 
     return redirect(url_for("index"))
+
+
+@app.route("/deletar/<int:id>")
+def deletar(id):
+    return verifica_login("deletar", prepara_deletar, id=id)
 
 
 @app.route(
